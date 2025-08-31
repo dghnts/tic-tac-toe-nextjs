@@ -13,14 +13,6 @@ export function useProfile() {
   const [profile, setProfile] = useState<Profile>({ display_name: null })
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (user) {
-      loadProfile()
-    } else {
-      setLoading(false)
-    }
-  }, [user])
-
   const loadProfile = async () => {
     if (!user) return
 
@@ -66,11 +58,19 @@ export function useProfile() {
 
       setProfile({ display_name: displayName })
       return { success: true }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error saving profile:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : 'エラーが発生しました' }
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      loadProfile()
+    } else {
+      setLoading(false)
+    }
+  }, [user, loadProfile])
 
   return {
     profile,

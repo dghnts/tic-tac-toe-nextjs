@@ -66,7 +66,7 @@ export default function Board({ xIsNext, squares, currentMove, onPlay, isAIMode,
         <div className="flex" key={row}>
           {Array.from({length: BOARD_SIZE}, (_, col) => {
             const idx = row * BOARD_SIZE + col
-            const highlight = winLine.includes(idx) && winner
+            const highlight = winLine.includes(idx) && !!winner
             return (
               <Square
                 key={idx}
