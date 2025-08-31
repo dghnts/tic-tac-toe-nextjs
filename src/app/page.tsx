@@ -3,9 +3,11 @@
 import { useAuth } from '@/contexts/AuthContext'
 import Auth from '@/components/Auth'
 import Game from '@/components/Game'
+import { useProfile } from '@/hooks/useProfile'
 
 export default function Home() {
   const { user, loading, signOut } = useAuth()
+  const { profile } = useProfile()
 
   if (loading) {
     return (
@@ -28,10 +30,12 @@ export default function Home() {
               <h1 className="text-xl font-semibold">Tic Tac Toe</h1>
             </div>
             <div className="flex items-center">
-              <span className="mr-4">{user.email}</span>
+              <span className="mr-4 text-gray-700">
+                {profile.display_name || user.email}
+              </span>
               <button
                 onClick={signOut}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 ログアウト
               </button>

@@ -6,6 +6,8 @@ import GameControls from './GameControls'
 import { calculateWinner } from '@/utils/gameLogic'
 import { getAIMove, AIDifficulty } from '@/utils/aiPlayer'
 import { formatPlayTime } from '@/utils/gameLogic'
+import { useGameData } from '@/hooks/useGameData'
+import { useProfile } from '@/hooks/useProfile'
 
 interface GameMove {
   squares: (string | null)[]
@@ -21,6 +23,9 @@ export default function Game() {
   const [aiDifficulty, setAiDifficulty] = useState<AIDifficulty>('normal')
   const [gameEnded, setGameEnded] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
+  
+  const { stats, saveGame } = useGameData()
+  const { profile } = useProfile()
   
   const xIsNext = currentMove % 2 === 0
   const currentSquares = history[currentMove].squares
@@ -71,6 +76,9 @@ export default function Game() {
     
     if (isGameEnd) {
       setGameEnded(true)
+      const durationSeconds = Math.floor((Date.now() - (gameStartTime || Date.now())) / 1000)
+      const finalWinner = winner || 'draw'
+      saveGame(finalWinner, nextHistory.length - 1, nextHistory, durationSeconds)
     }
   }
 
@@ -121,13 +129,43 @@ export default function Game() {
         />
       </div>
       
-      <div className="bg-gray-50 p-4 rounded-lg min-w-[300px]">
-        <div className="text-center mb-4">
-          <h3 className="text-lg font-semibold mb-2">ゲーム情報</h3>
-          <div className="text-sm space-y-1">
-            <p>モード: {isAIMode ? `AI対戦 (${aiDifficulty})` : '人対人'}</p>
-            <p>プレイ時間: {formatPlayTime(currentPlayTime)}</p>
+      <div className="bg-white p-6 rounded-lg shadow-md min-w-[300px]">
+        <div className="text-center mb-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">ゲーム情報</h3>
+          <div className="text-sm space-y-2">
+            <p className="text-gray-700">モード: {isAIMode ? `AI対戦 (${aiDifficulty})` : '人対人'}</p>
+            <p className="text-gray-700">プレイ時間: {formatPlayTime(currentPlayTime)}</p>
           </div>
+        </div>
+        
+        <div className="border-t pt-4">
+          <h4 className="text-md font-semibold mb-3 text-gray-800">統計情報</h4>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="text-center p-2 bg-gray-50 rounded">
+              <div className="font-bold text-lg text-blue-600">{stats.total_games}</div>
+              <div className="text-gray-600">総ゲーム数</div>
+            </div>
+            <div className="text-center p-2 bg-gray-50 rounded">
+              <div className="font-bold text-lg text-green-600">{stats.wins}</div>
+              <div className="text-gray-600">勝利</div>
+            </div>
+            <div className="text-center p-2 bg-gray-50 rounded">
+              <div className="font-bold text-lg text-red-600">{stats.losses}</div>
+              <div className="text-gray-600">敗北</div>
+            </div>
+            <div className="text-center p-2 bg-gray-50 rounded">
+              <div className="font-bold text-lg text-yellow-600">{stats.draws}</div>
+              <div className="text-gray-600">引き分け</div>
+            </div>
+          </div>
+          {stats.total_games > 0 && (
+            <div className="mt-3 text-center">
+              <div className="text-lg font-bold text-purple-600">
+                {Math.round((stats.wins / stats.total_games) * 100)}%
+              </div>
+              <div className="text-sm text-gray-600">勝率</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

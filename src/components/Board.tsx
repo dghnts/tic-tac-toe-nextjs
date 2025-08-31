@@ -41,7 +41,7 @@ export default function Board({ xIsNext, squares, currentMove, onPlay, isAIMode 
 
   return (
     <div className="flex flex-col items-center">
-      <div className="mb-4 text-lg font-bold text-center p-3 bg-gray-100 rounded-lg border">
+      <div className="mb-4 text-lg font-bold text-center p-3 bg-white rounded-lg border shadow-sm text-gray-800">
         {status}
       </div>
       {Array.from({length: BOARD_SIZE}, (_, row) => (

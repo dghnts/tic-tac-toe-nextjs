@@ -41,10 +41,10 @@ export default function GameControls({
         )}
       </div>
       
-      <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="bg-white p-4 rounded-lg shadow-sm border">
         <div className="flex items-center justify-center gap-4 mb-3">
           <label className="flex items-center gap-2 cursor-pointer">
-            <span className="text-sm font-medium">手動</span>
+            <span className="text-sm font-medium text-gray-700">手動</span>
             <div className="relative">
               <input
                 type="checkbox"
@@ -56,13 +56,13 @@ export default function GameControls({
                 <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 ease-in-out mt-1 ml-1 ${isAIMode ? 'translate-x-7' : ''}`} />
               </div>
             </div>
-            <span className="text-sm font-medium">AI</span>
+            <span className="text-sm font-medium text-gray-700">AI</span>
           </label>
         </div>
         
         {isAIMode && (
           <div className="flex items-center justify-center gap-2">
-            <label className="text-sm font-medium">難易度:</label>
+            <label className="text-sm font-medium text-gray-700">難易度:</label>
             <select
               value={aiDifficulty}
               onChange={(e) => onDifficultyChange(e.target.value as AIDifficulty)}
