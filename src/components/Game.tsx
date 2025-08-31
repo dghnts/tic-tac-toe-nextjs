@@ -24,6 +24,7 @@ export default function Game() {
   const [aiDifficulty, setAiDifficulty] = useState<AIDifficulty>('normal')
   const [gameEnded, setGameEnded] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
+  const [showMobileHistory, setShowMobileHistory] = useState(false)
   
   const { stats, saveGame } = useGameData()
   const { profile } = useProfile()
@@ -115,8 +116,8 @@ export default function Game() {
   }
 
   return (
-    <div className="flex flex-col xl:flex-row gap-6 items-start justify-center min-h-screen p-4">
-      <div className="flex flex-col items-center">
+    <div className="flex flex-col xl:flex-row gap-4 xl:gap-6 items-center xl:items-start justify-center min-h-screen p-4 xl:p-6 relative">
+      <div className="flex flex-col items-center w-full xl:w-auto">
         <Board
           xIsNext={xIsNext}
           squares={currentSquares}
@@ -137,12 +138,53 @@ export default function Game() {
         />
       </div>
       
+      {/* Desktop move history */}
       {gameStarted && (
-        <MoveHistory
-          history={history}
-          currentMove={currentMove}
-          onJumpTo={jumpTo}
-        />
+        <div className="hidden xl:flex w-auto justify-center">
+          <MoveHistory
+            history={history}
+            currentMove={currentMove}
+            onJumpTo={jumpTo}
+          />
+        </div>
+      )}
+      
+      {/* Mobile floating button */}
+      {gameStarted && (
+        <button
+          onClick={() => setShowMobileHistory(true)}
+          className="xl:hidden fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center text-xl font-bold z-10 transition-colors"
+          title="手番履歴"
+        >
+          📋
+        </button>
+      )}
+      
+      {/* Mobile modal */}
+      {showMobileHistory && (
+        <div className="xl:hidden fixed inset-0 bg-overlay flex items-center justify-center z-50 p-4">
+          <div className="bg-theme-secondary rounded-lg p-4 w-full max-w-sm max-h-[70vh] flex flex-col">
+            <div className="flex justify-between items-center mb-3">
+              <h4 className="text-lg font-semibold text-theme-primary">手番履歴</h4>
+              <button
+                onClick={() => setShowMobileHistory(false)}
+                className="text-theme-secondary hover:text-theme-primary text-xl"
+              >
+                ×
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <MoveHistory
+                history={history}
+                currentMove={currentMove}
+                onJumpTo={(move) => {
+                  jumpTo(move)
+                  setShowMobileHistory(false)
+                }}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

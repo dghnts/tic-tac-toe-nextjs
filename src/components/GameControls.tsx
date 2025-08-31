@@ -22,7 +22,7 @@ export default function GameControls({
   onDifficultyChange
 }: GameControlsProps) {
   return (
-    <div className="mt-6 space-y-4">
+    <div className="mt-4 xl:mt-6 space-y-3 xl:space-y-4">
       <div className="flex justify-center">
         {!gameStarted ? (
           <button
@@ -41,7 +41,7 @@ export default function GameControls({
         )}
       </div>
       
-      <div className="bg-theme-secondary p-4 rounded-lg shadow-sm border border-theme transition-colors">
+      <div className="bg-theme-secondary p-3 xl:p-4 rounded-lg shadow-sm border border-theme transition-colors">
         <div className="flex items-center justify-center gap-4 mb-3">
           <label className="flex items-center gap-3 cursor-pointer">
             <span className="text-sm font-medium text-theme-secondary">手動</span>

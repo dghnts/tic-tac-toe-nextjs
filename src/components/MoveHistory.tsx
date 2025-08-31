@@ -43,8 +43,8 @@ export default function MoveHistory({ history, currentMove, onJumpTo }: MoveHist
   })
 
   return (
-    <div className="bg-theme-secondary p-4 rounded-lg shadow-sm border border-theme transition-colors">
-      <h4 className="text-md font-semibold mb-3 text-theme-primary">手番履歴</h4>
+    <div className="bg-theme-secondary p-3 xl:p-4 rounded-lg shadow-sm border border-theme transition-colors w-full max-w-sm xl:max-w-none">
+      <h4 className="text-sm xl:text-md font-semibold mb-2 xl:mb-3 text-theme-primary text-center xl:text-left">手番履歴</h4>
       <div className="max-h-48 overflow-y-auto">
         <ol className="list-none">{moves}</ol>
       </div>
