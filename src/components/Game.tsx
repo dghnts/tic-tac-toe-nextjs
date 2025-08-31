@@ -116,8 +116,8 @@ export default function Game() {
   }
 
   return (
-    <div className="flex flex-col xl:flex-row gap-4 xl:gap-6 items-center xl:items-start justify-center min-h-screen p-4 xl:p-6 relative">
-      <div className="flex flex-col items-center w-full xl:w-auto">
+    <div className="flex flex-col xl:flex-row gap-4 xl:gap-6 items-center xl:items-start justify-center xl:justify-center min-h-screen p-4 xl:p-6 relative">
+      <div className="flex flex-col items-center w-full xl:w-auto justify-center xl:justify-start min-h-[calc(100vh-8rem)] xl:min-h-0">
         <Board
           xIsNext={xIsNext}
           squares={currentSquares}
