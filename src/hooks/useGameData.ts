@@ -41,8 +41,10 @@ export function useGameData() {
         .eq('user_id', user.id)
         .single()
 
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error loading stats:', error)
+      if (error) {
+        if (error.code !== 'PGRST116') {
+          console.error('Error loading stats:', error.message || error)
+        }
         return
       }
 
