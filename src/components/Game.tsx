@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Board from './Board'
 import GameControls from './GameControls'
+import MoveHistory from './MoveHistory'
 import { calculateWinner } from '@/utils/gameLogic'
 import { getAIMove, AIDifficulty } from '@/utils/aiPlayer'
 import { formatPlayTime } from '@/utils/gameLogic'
@@ -108,8 +109,13 @@ export default function Game() {
     resetGame()
   }
 
+  function jumpTo(nextMove: number) {
+    setCurrentMove(nextMove)
+    setGameEnded(false)
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start justify-center min-h-screen p-6">
+    <div className="flex flex-col xl:flex-row gap-6 items-start justify-center min-h-screen p-4">
       <div className="flex flex-col items-center">
         <Board
           xIsNext={xIsNext}
@@ -129,7 +135,8 @@ export default function Game() {
         />
       </div>
       
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md min-w-[300px] transition-colors">
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md min-w-[300px] transition-colors">
         <div className="text-center mb-6">
           <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">ゲーム情報</h3>
           <div className="text-sm space-y-2">
@@ -167,6 +174,15 @@ export default function Game() {
             </div>
           )}
         </div>
+        </div>
+        
+        {gameStarted && (
+          <MoveHistory
+            history={history}
+            currentMove={currentMove}
+            onJumpTo={jumpTo}
+          />
+        )}
       </div>
     </div>
   )
