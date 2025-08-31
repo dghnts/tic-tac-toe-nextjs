@@ -1,22 +1,36 @@
+import { useState, useEffect } from 'react'
+
 interface SquareProps {
   value: string | null
   onSquareClick: () => void
-  highlight?: boolean
+  highlight: boolean
 }
 
 export default function Square({ value, onSquareClick, highlight }: SquareProps) {
+  const [isClicked, setIsClicked] = useState(false)
+
+  // Reset animation when value changes
+  useEffect(() => {
+    if (value && !isClicked) {
+      setIsClicked(true)
+      // Reset after animation completes
+      const timer = setTimeout(() => setIsClicked(false), 600)
+      return () => clearTimeout(timer)
+    }
+  }, [value])
+
   return (
     <button
       className={`
         w-16 h-16 border-2 border-theme text-2xl font-bold text-theme-primary
-        hover:bg-theme-primary hover:scale-105 active:scale-95
-        transition-all duration-200 transform
-        ${highlight ? 'bg-yellow-300 shadow-lg animate-pulse' : 'bg-theme-secondary'}
-        ${value ? 'animate-bounce' : ''}
+        hover:bg-theme-primary active:scale-95
+        transition-all duration-200
+        ${highlight ? 'bg-winning animate-winning' : 'bg-theme-secondary'}
+        ${isClicked && !highlight ? 'animate-bounce' : ''}
       `}
       onClick={onSquareClick}
     >
-      <span className={value ? 'animate-fadeIn' : ''}>{value}</span>
+      {value}
     </button>
   )
 }
