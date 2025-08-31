@@ -6,6 +6,7 @@ import Auth from '@/components/Auth'
 import Game from '@/components/Game'
 import ProfileDialog from '@/components/ProfileDialog'
 import StatsDialog from '@/components/StatsDialog'
+import GameHistoryDialog from '@/components/GameHistoryDialog'
 import { useProfile } from '@/hooks/useProfile'
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   const { profile } = useProfile()
   const [showProfileDialog, setShowProfileDialog] = useState(false)
   const [showStatsDialog, setShowStatsDialog] = useState(false)
+  const [showHistoryDialog, setShowHistoryDialog] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
 
   if (loading) {
@@ -50,13 +52,13 @@ export default function Home() {
                 </button>
                 
                 {showDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border z-10">
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border dark:border-gray-700 z-10">
                     <button
                       onClick={() => {
                         setShowProfileDialog(true)
                         setShowDropdown(false)
                       }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       👤 プロフィール設定
                     </button>
@@ -65,14 +67,23 @@ export default function Home() {
                         setShowStatsDialog(true)
                         setShowDropdown(false)
                       }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
                       📊 統計情報
                     </button>
-                    <hr className="my-1" />
+                    <button
+                      onClick={() => {
+                        setShowHistoryDialog(true)
+                        setShowDropdown(false)
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      📋 ゲーム履歴
+                    </button>
+                    <hr className="my-1 border-gray-200 dark:border-gray-600" />
                     <button
                       onClick={signOut}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
                     >
                       🚺 ログアウト
                     </button>
@@ -95,6 +106,10 @@ export default function Home() {
       <StatsDialog 
         isOpen={showStatsDialog} 
         onClose={() => setShowStatsDialog(false)} 
+      />
+      <GameHistoryDialog 
+        isOpen={showHistoryDialog} 
+        onClose={() => setShowHistoryDialog(false)} 
       />
     </div>
   )

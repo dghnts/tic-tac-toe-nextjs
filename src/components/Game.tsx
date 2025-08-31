@@ -129,41 +129,41 @@ export default function Game() {
         />
       </div>
       
-      <div className="bg-white p-6 rounded-lg shadow-md min-w-[300px]">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md min-w-[300px] transition-colors">
         <div className="text-center mb-6">
-          <h3 className="text-lg font-semibold mb-4 text-gray-800">ゲーム情報</h3>
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">ゲーム情報</h3>
           <div className="text-sm space-y-2">
-            <p className="text-gray-700">モード: {isAIMode ? `AI対戦 (${aiDifficulty})` : '人対人'}</p>
-            <p className="text-gray-700">プレイ時間: {formatPlayTime(currentPlayTime)}</p>
+            <p className="text-gray-700 dark:text-gray-300">モード: {isAIMode ? `AI対戦 (${aiDifficulty})` : '人対人'}</p>
+            <p className="text-gray-700 dark:text-gray-300">プレイ時間: {formatPlayTime(currentPlayTime)}</p>
           </div>
         </div>
         
-        <div className="border-t pt-4">
-          <h4 className="text-md font-semibold mb-3 text-gray-800">統計情報</h4>
+        <div className="border-t dark:border-gray-700 pt-4">
+          <h4 className="text-md font-semibold mb-3 text-gray-800 dark:text-gray-200">統計情報</h4>
           <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="font-bold text-lg text-blue-600">{stats.total_games}</div>
-              <div className="text-gray-600">総ゲーム数</div>
+            <div className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
+              <div className="font-bold text-lg text-blue-600 dark:text-blue-400">{stats.total_games}</div>
+              <div className="text-gray-600 dark:text-gray-400">総ゲーム数</div>
             </div>
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="font-bold text-lg text-green-600">{stats.wins}</div>
-              <div className="text-gray-600">勝利</div>
+            <div className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
+              <div className="font-bold text-lg text-green-600 dark:text-green-400">{stats.wins}</div>
+              <div className="text-gray-600 dark:text-gray-400">勝利</div>
             </div>
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="font-bold text-lg text-red-600">{stats.losses}</div>
-              <div className="text-gray-600">敗北</div>
+            <div className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
+              <div className="font-bold text-lg text-red-600 dark:text-red-400">{stats.losses}</div>
+              <div className="text-gray-600 dark:text-gray-400">敗北</div>
             </div>
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="font-bold text-lg text-yellow-600">{stats.draws}</div>
-              <div className="text-gray-600">引き分け</div>
+            <div className="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded">
+              <div className="font-bold text-lg text-yellow-600 dark:text-yellow-400">{stats.draws}</div>
+              <div className="text-gray-600 dark:text-gray-400">引き分け</div>
             </div>
           </div>
           {stats.total_games > 0 && (
             <div className="mt-3 text-center">
-              <div className="text-lg font-bold text-purple-600">
+              <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
                 {Math.round((stats.wins / stats.total_games) * 100)}%
               </div>
-              <div className="text-sm text-gray-600">勝率</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">勝率</div>
             </div>
           )}
         </div>
