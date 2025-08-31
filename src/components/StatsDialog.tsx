@@ -13,35 +13,35 @@ export default function StatsDialog({ isOpen, onClose }: StatsDialogProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4 animate-slideIn transition-colors">
-        <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">統計情報</h3>
+    <div className="fixed inset-0 bg-overlay flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-theme-secondary rounded-lg p-6 w-full max-w-md mx-4 animate-slideIn transition-colors border border-theme">
+        <h3 className="text-lg font-semibold mb-4 text-theme-primary">統計情報</h3>
         
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
+          <div className="text-center p-4 bg-theme-primary rounded-lg border border-theme">
             <div className="text-2xl font-bold text-blue-600">{stats.total_games}</div>
-            <div className="text-sm text-gray-600">総ゲーム数</div>
+            <div className="text-sm text-theme-secondary">総ゲーム数</div>
           </div>
-          <div className="text-center p-4 bg-green-50 rounded-lg">
+          <div className="text-center p-4 bg-theme-primary rounded-lg border border-theme">
             <div className="text-2xl font-bold text-green-600">{stats.wins}</div>
-            <div className="text-sm text-gray-600">勝利</div>
+            <div className="text-sm text-theme-secondary">勝利</div>
           </div>
-          <div className="text-center p-4 bg-red-50 rounded-lg">
+          <div className="text-center p-4 bg-theme-primary rounded-lg border border-theme">
             <div className="text-2xl font-bold text-red-600">{stats.losses}</div>
-            <div className="text-sm text-gray-600">敗北</div>
+            <div className="text-sm text-theme-secondary">敗北</div>
           </div>
-          <div className="text-center p-4 bg-yellow-50 rounded-lg">
+          <div className="text-center p-4 bg-theme-primary rounded-lg border border-theme">
             <div className="text-2xl font-bold text-yellow-600">{stats.draws}</div>
-            <div className="text-sm text-gray-600">引き分け</div>
+            <div className="text-sm text-theme-secondary">引き分け</div>
           </div>
         </div>
 
         {stats.total_games > 0 && (
-          <div className="text-center p-4 bg-purple-50 rounded-lg mb-6">
+          <div className="text-center p-4 bg-theme-primary rounded-lg border border-theme mb-6">
             <div className="text-3xl font-bold text-purple-600">
               {Math.round((stats.wins / stats.total_games) * 100)}%
             </div>
-            <div className="text-sm text-gray-600">勝率</div>
+            <div className="text-sm text-theme-secondary">勝率</div>
           </div>
         )}
 

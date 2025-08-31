@@ -8,10 +8,10 @@ export default function Square({ value, onSquareClick, highlight }: SquareProps)
   return (
     <button
       className={`
-        w-16 h-16 border-2 border-gray-800 dark:border-gray-600 text-2xl font-bold text-gray-900 dark:text-gray-100
-        hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105 active:scale-95
+        w-16 h-16 border-2 border-theme text-2xl font-bold text-theme-primary
+        hover:bg-theme-primary hover:scale-105 active:scale-95
         transition-all duration-200 transform
-        ${highlight ? 'bg-yellow-300 dark:bg-yellow-600 shadow-lg animate-pulse' : 'bg-white dark:bg-gray-800'}
+        ${highlight ? 'bg-yellow-300 shadow-lg animate-pulse' : 'bg-theme-secondary'}
         ${value ? 'animate-bounce' : ''}
       `}
       onClick={onSquareClick}

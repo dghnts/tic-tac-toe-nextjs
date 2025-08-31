@@ -43,28 +43,28 @@ export default function GameHistoryDialog({ isOpen, onClose }: GameHistoryDialog
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col animate-slideIn transition-colors">
-        <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">ゲーム履歴</h3>
+    <div className="fixed inset-0 bg-overlay flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-theme-secondary rounded-lg p-6 w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col animate-slideIn transition-colors border border-theme">
+        <h3 className="text-lg font-semibold mb-4 text-theme-primary">ゲーム履歴</h3>
         
         <div className="flex-1 overflow-y-auto">
           {loading ? (
-            <div className="text-center py-8 text-gray-500">読み込み中...</div>
+            <div className="text-center py-8 text-theme-secondary">読み込み中...</div>
           ) : gameHistory.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">ゲーム履歴がありません</div>
+            <div className="text-center py-8 text-theme-secondary">ゲーム履歴がありません</div>
           ) : (
             <div className="space-y-3">
               {gameHistory.map((game) => (
-                <div key={game.id} className="border dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-700 transition-colors">
+                <div key={game.id} className="border border-theme rounded-lg p-4 bg-theme-primary transition-colors">
                   <div className="flex justify-between items-center mb-2">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getWinnerStyle(game.winner)}`}>
                       {getWinnerText(game.winner)}
                     </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <span className="text-sm text-theme-secondary">
                       {formatDate(game.created_at)}
                     </span>
                   </div>
-                  <div className="flex gap-6 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex gap-6 text-sm text-theme-secondary">
                     <span>手数: {game.moves_count}</span>
                     <span>時間: {formatPlayTime(game.duration_seconds || 0)}</span>
                   </div>

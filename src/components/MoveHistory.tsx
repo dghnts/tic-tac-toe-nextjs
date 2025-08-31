@@ -31,8 +31,8 @@ export default function MoveHistory({ history, currentMove, onJumpTo }: MoveHist
           className={`
             w-full text-left px-3 py-2 rounded text-sm transition-colors
             ${currentMove === move 
-              ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 font-medium' 
-              : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
+              ? 'bg-blue-100 text-blue-800 font-medium' 
+              : 'hover:bg-theme-primary text-theme-secondary'
             }
           `}
         >
@@ -43,8 +43,8 @@ export default function MoveHistory({ history, currentMove, onJumpTo }: MoveHist
   })
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border dark:border-gray-700 transition-colors">
-      <h4 className="text-md font-semibold mb-3 text-gray-800 dark:text-gray-200">手番履歴</h4>
+    <div className="bg-theme-secondary p-4 rounded-lg shadow-sm border border-theme transition-colors">
+      <h4 className="text-md font-semibold mb-3 text-theme-primary">手番履歴</h4>
       <div className="max-h-48 overflow-y-auto">
         <ol className="list-none">{moves}</ol>
       </div>
