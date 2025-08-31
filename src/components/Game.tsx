@@ -123,6 +123,8 @@ export default function Game() {
           currentMove={currentMove}
           onPlay={handlePlay}
           isAIMode={isAIMode}
+          currentPlayTime={currentPlayTime}
+          gameStarted={gameStarted}
         />
         <GameControls
           gameStarted={gameStarted}
@@ -135,55 +137,13 @@ export default function Game() {
         />
       </div>
       
-      <div className="flex flex-col lg:flex-row gap-6">
-        <div className="bg-theme-secondary p-6 rounded-lg shadow-md min-w-[300px] transition-colors border border-theme">
-        <div className="text-center mb-6">
-          <h3 className="text-lg font-semibold mb-4 text-theme-primary">ゲーム情報</h3>
-          <div className="text-sm space-y-2">
-            <p className="text-theme-secondary">モード: {isAIMode ? `AI対戦 (${aiDifficulty})` : '人対人'}</p>
-            <p className="text-theme-secondary">プレイ時間: {formatPlayTime(currentPlayTime)}</p>
-          </div>
-        </div>
-        
-        <div className="border-t border-theme pt-4">
-          <h4 className="text-md font-semibold mb-3 text-theme-primary">統計情報</h4>
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="text-center p-2 bg-theme-primary rounded border border-theme">
-              <div className="font-bold text-lg text-blue-600">{stats.total_games}</div>
-              <div className="text-theme-secondary">総ゲーム数</div>
-            </div>
-            <div className="text-center p-2 bg-theme-primary rounded border border-theme">
-              <div className="font-bold text-lg text-green-600">{stats.wins}</div>
-              <div className="text-theme-secondary">勝利</div>
-            </div>
-            <div className="text-center p-2 bg-theme-primary rounded border border-theme">
-              <div className="font-bold text-lg text-red-600">{stats.losses}</div>
-              <div className="text-theme-secondary">敗北</div>
-            </div>
-            <div className="text-center p-2 bg-theme-primary rounded border border-theme">
-              <div className="font-bold text-lg text-yellow-600">{stats.draws}</div>
-              <div className="text-theme-secondary">引き分け</div>
-            </div>
-          </div>
-          {stats.total_games > 0 && (
-            <div className="mt-3 text-center">
-              <div className="text-lg font-bold text-purple-600">
-                {Math.round((stats.wins / stats.total_games) * 100)}%
-              </div>
-              <div className="text-sm text-theme-secondary">勝率</div>
-            </div>
-          )}
-        </div>
-        </div>
-        
-        {gameStarted && (
-          <MoveHistory
-            history={history}
-            currentMove={currentMove}
-            onJumpTo={jumpTo}
-          />
-        )}
-      </div>
+      {gameStarted && (
+        <MoveHistory
+          history={history}
+          currentMove={currentMove}
+          onJumpTo={jumpTo}
+        />
+      )}
     </div>
   )
 }

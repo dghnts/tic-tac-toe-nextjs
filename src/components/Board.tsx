@@ -7,9 +7,11 @@ interface BoardProps {
   currentMove: number
   onPlay: (nextSquares: (string | null)[], position: number) => void
   isAIMode: boolean
+  currentPlayTime: number
+  gameStarted: boolean
 }
 
-export default function Board({ xIsNext, squares, currentMove, onPlay, isAIMode }: BoardProps) {
+export default function Board({ xIsNext, squares, currentMove, onPlay, isAIMode, currentPlayTime, gameStarted }: BoardProps) {
   const [winner, a, b, c] = calculateWinner(squares)
   
   function handleClick(i: number) {
@@ -39,8 +41,24 @@ export default function Board({ xIsNext, squares, currentMove, onPlay, isAIMode 
   // 勝利ラインのインデックス配列
   const winLine = [a, b, c]
 
+  const formatPlayTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    
+    if (minutes > 0) {
+      return `${minutes}分${secs}秒`
+    } else {
+      return `${secs}秒`
+    }
+  }
+
   return (
     <div className="flex flex-col items-center">
+      {gameStarted && (
+        <div className="mb-2 text-sm text-theme-secondary text-center">
+          プレイ時間: {formatPlayTime(currentPlayTime)}
+        </div>
+      )}
       <div className="mb-4 text-lg font-bold text-center p-3 bg-theme-secondary rounded-lg border border-theme shadow-sm text-theme-primary transition-colors">
         {status}
       </div>

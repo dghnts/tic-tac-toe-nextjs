@@ -43,17 +43,17 @@ export default function GameControls({
       
       <div className="bg-theme-secondary p-4 rounded-lg shadow-sm border border-theme transition-colors">
         <div className="flex items-center justify-center gap-4 mb-3">
-          <label className="flex items-center gap-2 cursor-pointer">
+          <label className="flex items-center gap-3 cursor-pointer">
             <span className="text-sm font-medium text-theme-secondary">手動</span>
-            <div className="relative">
+            <div className="relative flex items-center">
               <input
                 type="checkbox"
                 checked={isAIMode}
                 onChange={onToggleAI}
                 className="sr-only"
               />
-              <div className={`w-14 h-7 rounded-full transition-colors ${isAIMode ? 'bg-blue-600' : 'bg-gray-300'}`}>
-                <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 ease-in-out mt-1 ml-1 ${isAIMode ? 'translate-x-7' : ''}`} />
+              <div className={`w-14 h-7 rounded-full transition-colors flex items-center ${isAIMode ? 'bg-blue-600' : 'bg-gray-300'}`}>
+                <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 ease-in-out ml-1 ${isAIMode ? 'translate-x-7' : ''}`} />
               </div>
             </div>
             <span className="text-sm font-medium text-theme-secondary">AI</span>
